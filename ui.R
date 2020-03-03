@@ -24,6 +24,7 @@ fluidPage(
         )
         
     ),
+    
     mainPanel(
         # Output: Tabset w/ plot, summary, and table ----
         tabsetPanel(type = "tabs",

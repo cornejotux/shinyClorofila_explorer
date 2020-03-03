@@ -29,6 +29,7 @@ shinyServer(function(input, output, session) {
     output$plotByYear <- renderPlot({
         req(input$sliderYear)
         temp <- filter(chlorofila, Year >= input$sliderYear[1], Year <= input$sliderYear[2])
+        
         # ggplot(temp, 
             #    aes(x=md, y=sampleYear, height=meanEscape, group=sampleYear)) + 
             # geom_joy(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3") +
@@ -45,15 +46,24 @@ shinyServer(function(input, output, session) {
             # xlab("Day of the Year") + ylab("Return Year") + 
             # ggtitle(paste(input$Species, "run"), subtitle = paste(input$Region)) 
             
-        ggplot(temp, 
+        uno <- ggplot(temp, 
             aes(x=date, y=estacion, height=chl)) + 
-         geom_joy(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3")
+         geom_joy(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3") +
+          xlab("Fecha") + ylab("Estación")
         
         
+        avg <- temp %>%
+          group_by(MES, DIA) %>%
+          dplyr::summarize(Mean = mean(chl, na.rm=TRUE), sd=sd(chl, na.rm=TRUE)) %>% 
+          mutate(Year = ISOdate(2020, MES, DIA))
         
-               
-    },  height = 700, width = 600 )
+        dos <- ggplot(avg,
+                      aes(x=Year, y=Mean)) +
+              geom_point() + stat_smooth() + xlab("Día del año") + ylab("Chl-a Promedio (mg/m3??)")
+        
+        grid.arrange(grobs=list(uno, dos), nrow=2, heights=unit(c(7,2), c("in", "in")))
+    },  height = 800, width = 700 )
     
- 
-   
+    
 })
+    

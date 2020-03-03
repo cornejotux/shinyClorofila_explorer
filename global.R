@@ -32,6 +32,9 @@ library(dplyr)
 load("data/dataChl.RData")
 chlorofila <- rename(chlorofila, estacion = name, chl = value)
 
+## Calculate de average value by day across all the stations
+
+
 selectYears <- function(data=escape)
 {
     minY <- min(chlorofila$Year, na.rm = T)
