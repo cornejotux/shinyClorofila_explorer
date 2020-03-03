@@ -1,0 +1,12 @@
+name: ChlaExplorer
+title: ChlaExplorer
+username:
+account: cornejo
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1896301
+bundleId: 2847857
+url: https://cornejo.shinyapps.io/ChlaExplorer/
+when: 1583261148.52045
+asMultiple: FALSE
+asStatic: FALSE

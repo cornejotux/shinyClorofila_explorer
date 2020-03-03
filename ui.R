@@ -5,16 +5,11 @@ fluidPage(
     title="Chl-a Explorer",
     #theme = shinytheme("flatly"),
     headerPanel(
-        HTML('<center><img src="header.png" scale width="800" height="100"/></center>')
+        HTML('<center><img src="Abate.jpg"/></center>')
             ),
     sidebarPanel(
         HTML('
-            <table style="width:160%">
-                <tr>
-                    <td style="width: 50%"><left><img src="NCEAS.jpg" scale width="170" height="50"/></left></td>
-                    <td style="width: 50%"><right><img src="SASAP.jpg" scale width="50" height="50"/></right></td>
-                </tr>
-            </table>
+            <img src="Logo_Ifop.jpg" scale width="170" height="50"/>
             '),
             
 
