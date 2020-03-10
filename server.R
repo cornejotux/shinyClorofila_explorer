@@ -29,6 +29,7 @@ shinyServer(function(input, output, session) {
     output$plotByYear <- renderPlot({
         req(input$sliderYear)
         temp <- filter(chlorofila, Year >= input$sliderYear[1], Year <= input$sliderYear[2])
+        #temp <- filter(chlorofila, Year >= 2000, Year <= 2005)
         
         # ggplot(temp, 
             #    aes(x=md, y=sampleYear, height=meanEscape, group=sampleYear)) + 
@@ -50,7 +51,6 @@ shinyServer(function(input, output, session) {
             aes(x=date, y=estacion, height=chl)) + 
          geom_joy(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3") +
           xlab("Fecha") + ylab("Estación")
-        
         
         avg <- temp %>%
           group_by(MES, DIA) %>%

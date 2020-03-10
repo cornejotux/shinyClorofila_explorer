@@ -29,8 +29,27 @@ library(dplyr)
  # 
  # rm(chl, namesSt)
 
-load("data/dataChl.RData")
-chlorofila <- rename(chlorofila, estacion = name, chl = value)
+#load("data/dataChl.RData")
+
+micro35 <- read.csv(file = "data/micro_35_37.csv", stringsAsFactors = F)[-1]
+micro37 <- read.csv(file = "data/micro_37_38.csv", stringsAsFactors = F)[-1]
+np35 <- read.csv(file = "data/np_35_37.csv", stringsAsFactors = F)[-1]
+np37 <- read.csv(file = "data/np_37_38.csv", stringsAsFactors = F)[-1]
+
+
+
+### Esto es lo que se debe cambiar!!
+### Asignar el set de datos que se quiere usar a Chlrofila
+
+chlorofila <- micro37 ## <--- Aqui se seleccionan los datos!!
+
+
+
+##############################
+
+chlorofila <- rename(chlorofila, chl = value, Year = AÑO)
+chlorofila$date <- ISOdate(chlorofila$Year, chlorofila$MES, chlorofila$DIA)
+chlorofila <- select(chlorofila, Year, MES, DIA, estacion, chl, date)
 
 ## Calculate de average value by day across all the stations
 
