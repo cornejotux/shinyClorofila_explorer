@@ -39,11 +39,9 @@ np37 <- read.csv(file = "data/np_37_38.csv", stringsAsFactors = F)[-1]
 
 
 ### Esto es lo que se debe cambiar!!
-### Asignar el set de datos que se quiere usar a Chlrofila
+### Asignar el set de datos que se quiere usar a Chlorofila
 
 chlorofila <- micro37 ## <--- Aqui se seleccionan los datos!!
-
-
 
 ##############################
 
