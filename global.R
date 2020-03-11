@@ -35,13 +35,14 @@ micro35 <- read.csv(file = "data/micro_35_37.csv", stringsAsFactors = F)[-1]
 micro37 <- read.csv(file = "data/micro_37_38.csv", stringsAsFactors = F)[-1]
 np35 <- read.csv(file = "data/np_35_37.csv", stringsAsFactors = F)[-1]
 np37 <- read.csv(file = "data/np_37_38.csv", stringsAsFactors = F)[-1]
-
+total35 <- read.csv(file = "data/total_35_37.csv", stringsAsFactors = F)[-1]
+total37 <- read.csv(file = "data/total_37_38.csv", stringsAsFactors = F)[-1]
 
 
 ### Esto es lo que se debe cambiar!!
 ### Asignar el set de datos que se quiere usar a Chlorofila
 
-chlorofila <- micro37 ## <--- Aqui se seleccionan los datos!!
+chlorofila <- micro35 ## <--- Aqui se seleccionan los datos!!
 
 ##############################
 

@@ -43,3 +43,9 @@ write.csv(np_35_37, file="data/np_35_37.csv")
 np_37_38 <- ordenaLosDatos(file = "data/CHLA_N-P_37-38.xls", hasPromedio = F)
 write.csv(np_37_38, file="data/np_37_38.csv")
 
+total_35_37 <- ordenaLosDatos(file = "data/CHLA_TOTAL_35-37.xls", hasPromedio = F)
+write.csv(total_35_37, file="data/total_35_37.csv")
+
+total_37_38 <- ordenaLosDatos(file = "data/CHLA_TOTAL_37-38.xls", hasPromedio = F)
+write.csv(total_37_38, file="data/total_37_38.csv")
+
