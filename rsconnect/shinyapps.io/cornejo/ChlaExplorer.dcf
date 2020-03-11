@@ -5,8 +5,8 @@ account: cornejo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1896301
-bundleId: 2847904
+bundleId: 2871428
 url: https://cornejo.shinyapps.io/ChlaExplorer/
-when: 1583262202.70805
+when: 1583935884.05068
 asMultiple: FALSE
 asStatic: FALSE

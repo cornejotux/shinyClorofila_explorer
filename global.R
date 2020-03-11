@@ -42,7 +42,7 @@ total37 <- read.csv(file = "data/total_37_38.csv", stringsAsFactors = F)[-1]
 ### Esto es lo que se debe cambiar!!
 ### Asignar el set de datos que se quiere usar a Chlorofila
 
-chlorofila <- micro35 ## <--- Aqui se seleccionan los datos!!
+chlorofila <- total35 ## <--- Aqui se seleccionan los datos!!
 
 ##############################
 
