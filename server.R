@@ -29,28 +29,35 @@ shinyServer(function(input, output, session) {
     output$plotByYear <- renderPlot({
         req(input$sliderYear)
         temp <- filter(chlorofila, Year >= input$sliderYear[1], Year <= input$sliderYear[2])
-        #temp <- filter(chlorofila, Year >= 2000, Year <= 2005)
+        print(head(temp))
+        temp2 <- temp %>% 
+          group_by(estacion, Orden) %>% 
+          summarise (n = n())
         
-        # ggplot(temp, 
-            #    aes(x=md, y=sampleYear, height=meanEscape, group=sampleYear)) + 
-            # geom_joy(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3") +
-            # scale_x_date(breaks = date_breaks("2 weeks"), labels = date_format("%d-%b"), 
-            #              limits = c(as.Date(yday(input$dateRange[1]), format = "%j", origin = "1.1.2018"), 
-            #                         as.Date(yday(input$dateRange[2]), format = "%j", origin = "1.1.2018"))) +
-            # #geom_rangeframe() + 
-            # #theme_tufte() +
-            # #theme_hc() + 
-            # theme_joy() +
-            # theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12), 
-            #       axis.text.y = element_text(angle = 0, hjust = 1, size=12),
-            #       text = element_text(size=15), title = element_text(size=15)) +
-            # xlab("Day of the Year") + ylab("Return Year") + 
-            # ggtitle(paste(input$Species, "run"), subtitle = paste(input$Region)) 
-            
+        print(temp2)
+        # uno <- ggplot(temp, 
+        #     aes(x=date, y=estacion, height=chl)) + 
+        #  geom_joy(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3") +
+        #   xlab("Fecha") + ylab("Estación") + geom_rangeframe() +theme_tufte() +
+        #    theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12), 
+        #          axis.text.y = element_text(angle = 0, hjust = 1, size=12),
+        #          text = element_text(size=15), title = element_text(size=15)) #+
+        #   #ggtitle(paste(input$Species, "run"), subtitle = paste(input$Region)) 
+        
         uno <- ggplot(temp, 
-            aes(x=date, y=estacion, height=chl)) + 
-         geom_joy(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3") +
-          xlab("Fecha") + ylab("Estación")
+                      aes(x=date, y=as.factor(Orden), height=chl, label=estacion)) + 
+          geom_density_ridges(stat = "identity", rel_min_height = 0, scale=input$overlay, alpha=0.5, fill="dodgerblue3", col="dodgerblue3") +
+          xlab("Fecha") + ylab("Estación") + #geom_rangeframe() + 
+          theme_tufte() +
+          theme(axis.text.x = element_text(NULL), #angle = 45, hjust = 1, size=12), 
+                #axis.text.y = element_text(angle = 0, hjust = 1, size=12),
+                text = element_text(size=15), title = element_text(size=15),
+                axis.text.y=element_blank(),axis.ticks=element_blank(), 
+                axis.line.y = element_blank()
+                ) +
+          annotate("text", label = temp2$estacion, x=ISOdate(min(temp$Year), 1, 1), y = temp2$Orden, size = 3, colour = "red")
+          #scale_y_discrete(labels = estacion)
+        #ggtitle(paste(input$Species, "run"), subtitle = paste(input$Region)) 
         
         avg <- temp %>%
           group_by(MES, DIA) %>%

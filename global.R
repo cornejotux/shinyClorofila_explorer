@@ -38,17 +38,24 @@ np37 <- read.csv(file = "data/np_37_38.csv", stringsAsFactors = F)[-1]
 total35 <- read.csv(file = "data/total_35_37.csv", stringsAsFactors = F)[-1]
 total37 <- read.csv(file = "data/total_37_38.csv", stringsAsFactors = F)[-1]
 
+## Archivo con el orden de las estaciones
+orden35 <- read.csv(file="data/Estaciones_ordenadas_3537.csv", sep=";", dec=",")
+orden37 <- read.csv(file="data/Estaciones_ordenadas_3738.csv", sep=";", dec=",")
+
+## Ahora se combinan los datos con el archivo con el orden de las estaciones
+micro35 <- left_join(micro35, orden35, by=c("newSt"="EST"))
+
 
 ### Esto es lo que se debe cambiar!!
 ### Asignar el set de datos que se quiere usar a Chlorofila
 
-chlorofila <- np35 ## <--- Aqui se seleccionan los datos!!
+chlorofila <- micro35 ## <--- Aqui se seleccionan los datos!!
 
 ##############################
 
 chlorofila <- rename(chlorofila, chl = value, Year = names(chlorofila)[1])
 chlorofila$date <- ISOdate(chlorofila$Year, chlorofila$MES, chlorofila$DIA)
-chlorofila <- select(chlorofila, Year, MES, DIA, estacion, chl, date)
+chlorofila <- select(chlorofila, Year, MES, DIA, estacion, Orden, newSt, chl, date)
 
 ## Calculate de average value by day across all the stations
 
